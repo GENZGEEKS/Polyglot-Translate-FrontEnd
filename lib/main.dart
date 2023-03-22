@@ -1,10 +1,10 @@
-
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/services.dart' show rootBundle;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:polyglot/Glot-AI/GlotAI_main.dart';
 import 'package:polyglot/screens/home_screen.dart';
 import 'package:polyglot/screens/sign_in_screen.dart';
 import 'package:polyglot/screens/sign_up_screen.dart';
@@ -12,12 +12,14 @@ import 'package:polyglot/screens/splash_screen.dart';
 import 'package:polyglot/screens/translation_input_screen.dart';
 import 'package:polyglot/screens/translation_output_screen.dart';
 
+String output = "";
+
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +28,10 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
     return MaterialApp(
-      title: 'Polyglot',
+      title: 'PolyGlot',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        fontFamily: 'Poppins',
       ),
       home: const SplashScreen(),
       // home: const SignInScreen(),
@@ -61,26 +62,38 @@ class _DemoScreenState extends State<DemoScreen> {
   Widget build(BuildContext context) {
     String? imageString;
     return Scaffold(
-      appBar: AppBar(title: Text('Demo'),),
+      appBar: AppBar(
+        title: Text('Demo'),
+      ),
       body: SafeArea(
         child: Center(
           child: Column(
             children: [
               ElevatedButton(
                 onPressed: () async {
-                  await rootBundle.load('assets/images/camera_icon.png').then((value) {
+                  await rootBundle
+                      .load('assets/images/camera_icon.png')
+                      .then((value) {
                     setState(() {
                       imageString = get_image_base64(value);
                     });
                   });
                   print(imageString);
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => NextScreen(xys: imageString)));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => NextScreen(xys: imageString)));
                   print('Donee');
                   // print(base64String);
                 },
                 child: Text('Press'),
               ),
-              imageString!=null?Text(imageString!, style: TextStyle(color: Colors.black),):const SizedBox(),
+              imageString != null
+                  ? Text(
+                      imageString!,
+                      style: TextStyle(color: Colors.black),
+                    )
+                  : const SizedBox(),
             ],
           ),
         ),
