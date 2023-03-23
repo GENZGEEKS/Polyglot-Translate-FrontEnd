@@ -3,25 +3,36 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:polyglot/main.dart';
 import 'package:http/http.dart' as http;
 import 'package:polyglot/screens/InputText.dart';
 import 'package:polyglot/screens/output.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+import '../Utils/Colors.dart';
+
+bool isLoading = false;
+
+class HomeScreen2 extends StatefulWidget {
+  const HomeScreen2({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<HomeScreen2> createState() => _HomeScreen2State();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreen2State extends State<HomeScreen2> {
   int stepCount = 0;
   String language = "English";
-  bool isLoading = false;
   String base64Image = "";
-  List<String> languageList = <String>['English', 'Hindi', 'Gujarati'];
+  List<String> languageList = <String>[
+    'English',
+    'Hindi',
+    'Gujarati',
+    'German',
+    'French'
+  ];
 //  List<String> languageList = <String>['English', 'Hindi', 'Gujarati'];
 
   @override
@@ -37,21 +48,15 @@ class _HomeScreenState extends State<HomeScreen> {
     }
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        toolbarHeight: 80.0,
-        title: const Text(
-          'POLYGLOT',
-          style: TextStyle(color: Color(0xff545454), fontSize: 28.0),
-        ),
-        centerTitle: true,
-        leading: const Padding(
-          padding: EdgeInsets.only(left: 10.0),
-          child: CircleAvatar(
-            minRadius: 20,
-            maxRadius: 30,
-          ),
+        backgroundColor: white,
+        title: Text(
+          'PolyGlot',
+          style: TextStyle(
+              color: mainColor,
+              fontSize: 45.0,
+              fontFamily: GoogleFonts.lobster().fontFamily),
         ),
         elevation: 0.0,
       ),
@@ -60,38 +65,32 @@ class _HomeScreenState extends State<HomeScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: SafeArea(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
                 children: const [
                   Text(
                     'Translation Made Easier',
                     style: TextStyle(
-                      fontSize: 24.0,
-                      fontWeight: FontWeight.w500,
-                      color: Color(0xff4b9600),
+                      fontSize: 12.0,
+                      fontWeight: FontWeight.bold,
+                      color: iconColor3,
                     ),
                   ),
                 ],
               ),
             ),
           ),
-          const Divider(
-            color: Color(0xFF9F9F9F),
-            thickness: 4,
-            height: 20,
-          ),
-          Spacer(),
-
-          const SizedBox(height: 16),
 
           GestureDetector(
             onTap: () async {
               final ImagePicker _picker = ImagePicker();
-              final XFile? photo =
-                  await _picker.pickImage(source: ImageSource.camera);
+              final XFile? photo = await _picker.pickImage(
+                source: ImageSource.camera,
+                maxHeight: 500,
+                maxWidth: 500,
+              );
               String path = photo?.path ?? "";
               if (path.isEmpty) return null;
               File cameraFile = File(path);
@@ -122,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           radius: 48,
                           backgroundColor: Colors.green,
                           child: Image.asset(
-                            "assets/images/camera_icon.png",
+                            "assets/images/camera.png",
                             width: 60,
                           ),
                         ),
@@ -165,7 +164,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           radius: 48,
                           backgroundColor: Colors.green,
                           child: Image.asset(
-                            "assets/images/gallery_icon.png",
+                            "assets/images/camera.png",
                             width: 60,
                           ),
                         ),
@@ -206,7 +205,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           radius: 48,
                           backgroundColor: Colors.green,
                           child: Image.asset(
-                            "assets/images/text_icon.png",
+                            "assets/images/camera.png",
                             width: 60,
                           ),
                         ),
@@ -278,11 +277,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   });
                 });
 
-                print(response.body);
-                final jsonData = jsonDecode(response.body);
+                // print("response.body" + response.body.toString());
+                var responseJson = utf8.decode(response.bodyBytes);
+                print("reposnse json" + responseJson.toString());
+                final jsonData = jsonDecode(responseJson);
+                // print("\nobject" + jsonData.toString());
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => Output(
-                          output: jsonData['translation'],
+                          output:
+                              // responseJson.toString(),
+                              jsonData['translation'],
                         )));
               },
               child: Padding(
