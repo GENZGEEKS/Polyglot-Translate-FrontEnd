@@ -287,6 +287,7 @@ class _HomeScreen2State extends State<HomeScreen2> {
                           output:
                               // responseJson.toString(),
                               jsonData['translation'],
+                          language: language,
                         )));
               },
               child: Padding(

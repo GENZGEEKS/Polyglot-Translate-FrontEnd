@@ -19,7 +19,8 @@ var trString;
 
 class Output extends StatefulWidget {
   final String output;
-  const Output({key, required this.output});
+  final String language;
+  const Output({key, required this.output, required this.language});
 
   @override
   State<Output> createState() => OutputState();
@@ -160,42 +161,44 @@ class OutputState extends State<Output> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => SanketSign()));
-                          },
-                          child: Container(
-                            height: MediaQuery.of(context).size.height / 3 - 50,
-                            width: MediaQuery.of(context).size.width / 2 - 40,
-                            decoration: BoxDecoration(
-                              color: lightGrdColor.withOpacity(0.8),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                    "assets/images/sign.png",
-                                    height: 70,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 20),
-                                    child: Text(
-                                      'Sign Translate',
-                                      style: TextStyle(
-                                          fontFamily:
-                                              GoogleFonts.pacifico().fontFamily,
-                                          color: black,
-                                          fontSize: 20),
+                        if (language.toLowerCase() == "english")
+                          InkWell(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => SanketSign()));
+                            },
+                            child: Container(
+                              height:
+                                  MediaQuery.of(context).size.height / 3 - 50,
+                              width: MediaQuery.of(context).size.width / 2 - 40,
+                              decoration: BoxDecoration(
+                                color: lightGrdColor.withOpacity(0.8),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      "assets/images/sign.png",
+                                      height: 70,
                                     ),
-                                  ),
-                                ],
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 20),
+                                      child: Text(
+                                        'Sign Translate',
+                                        style: TextStyle(
+                                            fontFamily: GoogleFonts.pacifico()
+                                                .fontFamily,
+                                            color: black,
+                                            fontSize: 20),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-                        ),
                         InkWell(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
@@ -240,8 +243,8 @@ class OutputState extends State<Output> {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => GlotAI()));
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const GlotAI()));
               },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),

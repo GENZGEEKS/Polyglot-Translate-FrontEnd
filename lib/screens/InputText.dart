@@ -116,6 +116,7 @@ class _InputTextState extends State<InputText> {
                               output:
                                   // responseJson.toString(),
                                   jsonData['translation'],
+                              language: language,
                             )));
                   },
                   child: const Padding(

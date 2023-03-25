@@ -361,9 +361,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           InkWell(
                             onTap: () {
-                              // Navigator.of(context).push(MaterialPageRoute(
-                              //     builder: (context) => SanketSign()
-                              //     ));
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => SanketSign()));
                             },
                             child: Container(
                               height:
@@ -378,13 +377,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Image.asset(
-                                      "assets/images/info.png",
+                                      "assets/images/sign.png",
                                       height: 70,
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(top: 20),
                                       child: Text(
-                                        'About Us',
+                                        'Sign Translate',
                                         style: TextStyle(
                                             fontFamily: GoogleFonts.pacifico()
                                                 .fontFamily,
@@ -397,6 +396,45 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                           ),
+
+                          // InkWell(
+                          //   onTap: () {
+                          //     // Navigator.of(context).push(MaterialPageRoute(
+                          //     //     builder: (context) => SanketSign()
+                          //     //     ));
+                          //   },
+                          //   child: Container(
+                          //     height:
+                          //         MediaQuery.of(context).size.height / 3 - 50,
+                          //     width: MediaQuery.of(context).size.width / 2 - 40,
+                          //     decoration: BoxDecoration(
+                          //       color: darkGrdColor.withOpacity(0.8),
+                          //       borderRadius: BorderRadius.circular(20),
+                          //     ),
+                          //     child: Center(
+                          //       child: Column(
+                          //         mainAxisAlignment: MainAxisAlignment.center,
+                          //         children: [
+                          //           Image.asset(
+                          //             "assets/images/info.png",
+                          //             height: 70,
+                          //           ),
+                          //           Padding(
+                          //             padding: const EdgeInsets.only(top: 20),
+                          //             child: Text(
+                          //               'About Us',
+                          //               style: TextStyle(
+                          //                   fontFamily: GoogleFonts.pacifico()
+                          //                       .fontFamily,
+                          //                   color: white,
+                          //                   fontSize: 20),
+                          //             ),
+                          //           ),
+                          //         ],
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
                         ],
                       ),
                     ]),
@@ -475,6 +513,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 output:
                                     // responseJson.toString(),
                                     jsonData['translation'],
+                                language: language,
                               )));
                     },
                     style: ElevatedButton.styleFrom(

@@ -56,7 +56,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  margin: const EdgeInsets.fromLTRB(0, 0.0, 0, 0.0),
+                  margin: const EdgeInsets.fromLTRB(0, 20.0, 0, 10.0),
                   child: AnimatedSwitcher(
                     duration: const Duration(milliseconds: 500),
                     child: Image(
@@ -74,7 +74,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
 
                 const Divider(
                   thickness: 2,
-                  color: Colors.orange,
+                  color: Colors.blue,
                   indent: 20,
                   endIndent: 20,
                 ),
@@ -101,7 +101,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
 
                 const Divider(
                   thickness: 2,
-                  color: Colors.orange,
+                  color: Colors.blue,
                   indent: 20,
                   endIndent: 20,
                 ),
@@ -114,7 +114,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
                 //
                 //     child: Container(
                 //     decoration: BoxDecoration(
-                //         color: Colors.orange,
+                //         color: Colors.blue,
                 //         borderRadius: BorderRadius.only(
                 //         topRight: Radius.circular(MediaQuery.of(context).size.width/2),
                 //         topLeft: Radius.circular(MediaQuery.of(context).size.width/2),

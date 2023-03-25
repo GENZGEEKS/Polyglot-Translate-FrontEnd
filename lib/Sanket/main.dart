@@ -11,12 +11,13 @@ class SanketSign extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'PolyGlot Sanket',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primarySwatch: Colors.orange,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
-        home: SpeechScreen());
+      title: 'PolyGlot Sanket',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      home: SpeechScreen(),
+    );
   }
 }
