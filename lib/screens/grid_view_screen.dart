@@ -361,8 +361,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           InkWell(
                             onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => SanketSign()));
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => const SanketSign(
+                                    isFromHome: true,
+                                  ),
+                                ),
+                              );
                             },
                             child: Container(
                               height:

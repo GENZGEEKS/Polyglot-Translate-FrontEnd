@@ -5,7 +5,8 @@ import 'package:page_transition/page_transition.dart';
 import 'package:polyglot/Sanket/speechToSign.dart';
 
 class SanketSign extends StatelessWidget {
-  const SanketSign({Key key}) : super(key: key);
+  final bool isFromHome;
+  const SanketSign({Key key, this.isFromHome = false}) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -17,7 +18,7 @@ class SanketSign extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: SpeechScreen(),
+      home: SpeechScreen(isFromHome: isFromHome),
     );
   }
 }

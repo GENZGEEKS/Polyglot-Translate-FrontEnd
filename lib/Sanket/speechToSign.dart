@@ -5,7 +5,9 @@ import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:polyglot/Sanket/utils.dart' as utils;
 
 class SpeechScreen extends StatefulWidget {
-  const SpeechScreen({Key? key}) : super(key: key);
+  final bool isFromHome;
+
+  const SpeechScreen({Key? key, this.isFromHome = false}) : super(key: key);
 
   @override
   State<SpeechScreen> createState() => _SpeechScreenState();
@@ -24,7 +26,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
   @override
   void initState() {
     super.initState();
-    translation(output);
+    if (widget.isFromHome == false) translation(output);
     _speech = stt.SpeechToText();
   }
 
@@ -42,7 +44,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
         leading: Builder(
           builder: (BuildContext context) {
             return IconButton(
-              icon: new Image.asset("assets/logo/sanket_icon.png"),
+              icon: Image.asset("assets/logo/sanket_icon.png"),
               onPressed: () {},
             );
           },
@@ -144,21 +146,23 @@ class _SpeechScreenState extends State<SpeechScreen> {
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: AvatarGlow(
-        animate: _isListening,
-        glowColor: Theme.of(context).primaryColor,
-        endRadius: 75.0,
-        duration: const Duration(milliseconds: 2000),
-        repeatPauseDuration: const Duration(milliseconds: 100),
-        repeat: true,
-        child: FloatingActionButton(
-          onPressed: _listen,
-          child: Icon(_isListening ? Icons.mic : Icons.mic_none),
-          foregroundColor: Colors.white,
-          // backgroundColor: Colors.white,
-          // foregroundColor: Theme.of(context).primaryColor,
-        ),
-      ),
+      floatingActionButton: widget.isFromHome
+          ? AvatarGlow(
+              animate: _isListening,
+              glowColor: Theme.of(context).primaryColor,
+              endRadius: 75.0,
+              duration: const Duration(milliseconds: 2000),
+              repeatPauseDuration: const Duration(milliseconds: 100),
+              repeat: true,
+              child: FloatingActionButton(
+                onPressed: _listen,
+                child: Icon(_isListening ? Icons.mic : Icons.mic_none),
+                foregroundColor: Colors.white,
+                // backgroundColor: Colors.white,
+                // foregroundColor: Theme.of(context).primaryColor,
+              ),
+            )
+          : Container(),
     );
   }
 
