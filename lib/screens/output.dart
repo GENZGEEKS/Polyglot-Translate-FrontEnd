@@ -200,10 +200,7 @@ class OutputState extends State<Output> {
                             ),
                           ),
                         InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => SanketSign()));
-                          },
+                          onTap: () {},
                           child: Container(
                             height: MediaQuery.of(context).size.height / 3 - 50,
                             width: MediaQuery.of(context).size.width / 2 - 40,
