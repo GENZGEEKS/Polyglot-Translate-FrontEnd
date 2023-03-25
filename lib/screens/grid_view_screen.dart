@@ -513,13 +513,16 @@ class _HomeScreenState extends State<HomeScreen> {
                       print("reposnse json" + responseJson.toString());
                       output = jsonData['translation'];
                       // print("\nobject" + jsonData.toString());
-                      Navigator.of(context).push(MaterialPageRoute(
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
                           builder: (context) => Output(
-                                output:
-                                    // responseJson.toString(),
-                                    jsonData['translation'],
-                                language: language,
-                              )));
+                            output:
+                                // responseJson.toString(),
+                                jsonData['translation'],
+                            language: language,
+                          ),
+                        ),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       elevation: 0,

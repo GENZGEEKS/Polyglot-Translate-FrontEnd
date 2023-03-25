@@ -1,10 +1,13 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:polyglot/Glot-AI/constants/api_consts.dart';
 import 'package:polyglot/screens/grid_view_screen.dart';
 import 'package:polyglot/screens/output.dart';
 import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
 
 import '../providers/chats_provider.dart';
 import '../providers/models_provider.dart';
@@ -50,6 +53,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
     final modelsProvider = Provider.of<ModelsProvider>(context);
     final chatProvider = Provider.of<ChatProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         elevation: 2,
@@ -113,8 +117,9 @@ class _ChatScreenState extends State<ChatScreen> {
                               chatProvider: chatProvider);
                         },
                         decoration: const InputDecoration.collapsed(
-                            hintText: "Ask anything!",
-                            hintStyle: TextStyle(color: Colors.grey)),
+                          hintText: "Ask anything!",
+                          hintStyle: TextStyle(color: Colors.grey),
+                        ),
                       ),
                     ),
                     IconButton(
@@ -180,7 +185,9 @@ class _ChatScreenState extends State<ChatScreen> {
         focusNode.unfocus();
       });
       await chatProvider.sendMessageAndGetAnswers(
-          msg: msg, chosenModelId: modelsProvider.getCurrentModel);
+        msg: msg,
+        chosenModelId: modelsProvider.getCurrentModel,
+      );
       // chatList.addAll(await ApiService.sendMessage(
       //   message: textEditingController.text,
       //   modelId: modelsProvider.getCurrentModel,

@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:polyglot/Glot-AI/GlotAI_main.dart';
+import 'package:polyglot/screens/explore_screen.dart';
 import 'package:polyglot/screens/grid_view_screen.dart';
 import 'package:polyglot/screens/more_details.dart';
 import 'package:path_provider/path_provider.dart';
@@ -200,7 +201,16 @@ class OutputState extends State<Output> {
                             ),
                           ),
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => ExploreScreen(
+                                  output: widget.output,
+                                  language: language,
+                                ),
+                              ),
+                            );
+                          },
                           child: Container(
                             height: MediaQuery.of(context).size.height / 3 - 50,
                             width: MediaQuery.of(context).size.width / 2 - 40,
@@ -219,7 +229,7 @@ class OutputState extends State<Output> {
                                   Padding(
                                     padding: const EdgeInsets.only(top: 20),
                                     child: Text(
-                                      'Explore',
+                                      'Word Meanings',
                                       style: TextStyle(
                                           fontFamily:
                                               GoogleFonts.pacifico().fontFamily,
