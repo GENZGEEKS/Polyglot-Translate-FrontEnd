@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:audioplayer/audioplayer.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:polyglot/Glot-AI/GlotAI_main.dart';
 import 'package:polyglot/screens/grid_view_screen.dart';
 import 'package:polyglot/screens/more_details.dart';
@@ -80,7 +80,8 @@ class OutputState extends State<Output> {
                                   http.Response response = await http
                                       .post(
                                         Uri.parse(
-                                            "https://polyglot-translation-speech.onrender.com/audio/output.mp3"),
+                                          "https://polyglot-translation-speech.onrender.com/synthesize?format=mp3",
+                                        ),
                                         headers: {
                                           'accept': 'application/json',
                                           'Content-Type': 'application/json'
@@ -92,28 +93,31 @@ class OutputState extends State<Output> {
                                         ),
                                       )
                                       .catchError(print)
-                                      .whenComplete(() {
-                                    setState(() {
-                                      print(
-                                          "object" + widget.output.toString());
-                                      isLoading = false;
-                                    });
-                                  });
-                                  print(response.body);
-                                  print(response.bodyBytes);
+                                      .whenComplete(() async {
+                                    print("Request for audio is sent!");
+                                    http.Response response = await http.get(
+                                      Uri.parse(
+                                          "https://polyglot-translation-speech.onrender.com/audio/output.mp3"),
+                                    );
+                                    print("Audio received..");
+                                    print(response.body);
+                                    print(response.bodyBytes);
 
-                                  final dir =
-                                      await getExternalStorageDirectory();
-                                  String path = dir?.path ?? "";
-                                  String musicFilePath =
-                                      path + "/tempFiles/output.mp3";
-                                  File musicFile = File(musicFilePath);
-                                  musicFile.createSync(recursive: true);
-                                  musicFile
-                                      .writeAsBytesSync(response.bodyBytes);
-                                  AudioPlayer audioPlugin = AudioPlayer();
-                                  audioPlugin.play(musicFilePath,
-                                      isLocal: true);
+                                    final dir =
+                                        await getExternalStorageDirectory();
+                                    String path = dir?.path ?? "";
+                                    String musicFilePath =
+                                        path + "/tempFiles/output.mp3";
+                                    print(musicFilePath);
+                                    File musicFile = File(musicFilePath);
+                                    musicFile.createSync(recursive: true);
+                                    musicFile
+                                        .writeAsBytesSync(response.bodyBytes);
+                                    AudioPlayer audioPlugin = AudioPlayer();
+                                    await audioPlugin
+                                        .setFilePath(musicFilePath);
+                                    audioPlugin.play();
+                                  });
                                   // showDialog(
                                   //     context: context,
                                   //     builder: (context) {

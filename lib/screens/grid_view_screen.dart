@@ -231,10 +231,11 @@ class _HomeScreenState extends State<HomeScreen> {
                               var bytes = cameraFile.readAsBytesSync();
                               base64Image = base64Encode(bytes);
                               showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return Image.file(cameraFile);
-                                  });
+                                context: context,
+                                builder: (context) {
+                                  return Image.file(cameraFile);
+                                },
+                              );
                             },
                             child: Container(
                               height:
